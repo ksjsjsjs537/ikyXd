@@ -1,0 +1,546 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RestApi Ikyy</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    body { padding-bottom: 80px; }
+    .api-card { transition: all 0.3s ease; }
+    .api-card:hover { transform: translateY(-2px); box-shadow: 0 8px 16px rgba(59, 130, 246, 0.2); }
+    .mobile-nav { position: fixed; bottom: 0; left: 0; right: 0; z-index: 50; }
+    @media (min-width: 768px) { body { padding-bottom: 0; } .mobile-nav { display: none; } }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-[#050a14] via-[#071226] to-[#0a1929] text-gray-100 font-sans min-h-screen">
+  <div class="max-w-7xl mx-auto px-4 py-6">
+    <header class="mb-8 text-center">
+      <div class="inline-flex items-center gap-3 mb-4">
+        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-2xl">
+          <i class="fas fa-bolt text-white"></i>
+        </div>
+        <div class="text-left">
+          <h1 class="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">Ikyy RestAPI</h1>
+          <p class="text-sm text-gray-400">Complete API Collection</p>
+        </div>
+      </div>
+    </header>
+
+    <div id="content-area" class="space-y-6">
+      <section id="downloader-section">
+        <div class="bg-gradient-to-br from-[#0f1724] to-[#1a2332] border border-blue-500/20 rounded-2xl p-6 shadow-xl">
+          <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+            <i class="fas fa-download text-blue-400"></i> Downloader
+          </h2>
+          <div class="grid md:grid-cols-2 gap-4">
+            
+            <div class="api-card bg-[#0a1929]/60 border border-blue-500/30 rounded-xl overflow-hidden">
+              <div class="p-4 cursor-pointer" onclick="toggleDetails('tiktok')">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="px-3 py-1 bg-blue-600 text-white rounded-lg font-semibold text-xs">GET</span>
+                    <div>
+                      <div class="text-sm font-semibold text-white">/api/d/tiktok</div>
+                      <div class="text-xs text-gray-400">TikTok Video Downloader</div>
+                    </div>
+                  </div>
+                  <div class="flex gap-2">
+                    <button onclick="event.stopPropagation(); copyEndpoint('/api/d/tiktok?url=')" class="px-2 py-1 bg-gray-700 hover:bg-gray-600 rounded text-xs"><i class="fas fa-copy"></i></button>
+                    <button onclick="event.stopPropagation(); goToEndpoint('/api/d/tiktok')" class="px-2 py-1 bg-gray-700 hover:bg-gray-600 rounded text-xs"><i class="fas fa-external-link-alt"></i></button>
+                    <i class="fas fa-chevron-down text-gray-400"></i>
+                  </div>
+                </div>
+              </div>
+              <div id="tiktok-details" class="hidden border-t border-blue-500/20 p-4 bg-[#050a14]/50">
+                <input type="text" id="tiktok-url" placeholder="https://vt.tiktok.com/..." class="w-full bg-[#0a1929] border border-blue-500/30 rounded-lg px-4 py-2 text-sm text-white mb-3 focus:outline-none focus:border-blue-500">
+                <button onclick="testApi('tiktok')" class="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:from-blue-700 hover:to-blue-800">Test API</button>
+                <div id="tiktok-result" class="mt-3 hidden">
+                  <div class="text-xs text-gray-400 mb-1">Response:</div>
+                  <pre class="bg-[#0a1929] border border-blue-500/20 rounded-lg p-3 text-xs overflow-auto max-h-64 text-green-400"></pre>
+                </div>
+              </div>
+            </div>
+
+            <div class="api-card bg-[#0a1929]/60 border border-blue-500/30 rounded-xl overflow-hidden">
+              <div class="p-4 cursor-pointer" onclick="toggleDetails('instagram')">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="px-3 py-1 bg-blue-600 text-white rounded-lg font-semibold text-xs">GET</span>
+                    <div>
+                      <div class="text-sm font-semibold text-white">/api/d/instagram</div>
+                      <div class="text-xs text-gray-400">Instagram Downloader</div>
+                    </div>
+                  </div>
+                  <div class="flex gap-2">
+                    <button onclick="event.stopPropagation(); copyEndpoint('/api/d/instagram?url=')" class="px-2 py-1 bg-gray-700 hover:bg-gray-600 rounded text-xs"><i class="fas fa-copy"></i></button>
+                    <button onclick="event.stopPropagation(); goToEndpoint('/api/d/instagram')" class="px-2 py-1 bg-gray-700 hover:bg-gray-600 rounded text-xs"><i class="fas fa-external-link-alt"></i></button>
+                    <i class="fas fa-chevron-down text-gray-400"></i>
+                  </div>
+                </div>
+              </div>
+              <div id="instagram-details" class="hidden border-t border-blue-500/20 p-4 bg-[#050a14]/50">
+                <input type="text" id="instagram-url" placeholder="https://www.instagram.com/..." class="w-full bg-[#0a1929] border border-blue-500/30 rounded-lg px-4 py-2 text-sm text-white mb-3 focus:outline-none focus:border-blue-500">
+                <button onclick="testApi('instagram')" class="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:from-blue-700 hover:to-blue-800">Test API</button>
+                <div id="instagram-result" class="mt-3 hidden">
+                  <div class="text-xs text-gray-400 mb-1">Response:</div>
+                  <pre class="bg-[#0a1929] border border-blue-500/20 rounded-lg p-3 text-xs overflow-auto max-h-64 text-green-400"></pre>
+                </div>
+              </div>
+            </div>
+
+            <div class="api-card bg-[#0a1929]/60 border border-red-500/30 rounded-xl overflow-hidden">
+              <div class="p-4 cursor-pointer" onclick="toggleDetails('xnxxdl')">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="px-3 py-1 bg-red-600 text-white rounded-lg font-semibold text-xs">GET</span>
+                    <div>
+                      <div class="text-sm font-semibold text-white">/api/d/xnxxdl</div>
+                      <div class="text-xs text-gray-400">XNXX Downloader (18+)</div>
+                    </div>
+                  </div>
+                  <div class="flex gap-2">
+                    <button onclick="event.stopPropagation(); copyEndpoint('/api/d/xnxxdl?url=')" class="px-2 py-1 bg-gray-700 hover:bg-gray-600 rounded text-xs"><i class="fas fa-copy"></i></button>
+                    <button onclick="event.stopPropagation(); goToEndpoint('/api/d/xnxxdl')" class="px-2 py-1 bg-gray-700 hover:bg-gray-600 rounded text-xs"><i class="fas fa-external-link-alt"></i></button>
+                    <i class="fas fa-chevron-down text-gray-400"></i>
+                  </div>
+                </div>
+              </div>
+              <div id="xnxxdl-details" class="hidden border-t border-red-500/20 p-4 bg-[#050a14]/50">
+                <input type="text" id="xnxxdl-url" placeholder="https://www.xnxx.com/video..." class="w-full bg-[#0a1929] border border-red-500/30 rounded-lg px-4 py-2 text-sm text-white mb-3 focus:outline-none focus:border-red-500">
+                <button onclick="testApi('xnxxdl')" class="w-full bg-gradient-to-r from-red-600 to-red-700 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:from-red-700 hover:to-red-800">Test API</button>
+                <div id="xnxxdl-result" class="mt-3 hidden">
+                  <div class="text-xs text-gray-400 mb-1">Response:</div>
+                  <pre class="bg-[#0a1929] border border-red-500/20 rounded-lg p-3 text-xs overflow-auto max-h-64 text-green-400"></pre>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <section id="search-section">
+        <div class="bg-gradient-to-br from-[#0f1724] to-[#1a2332] border border-green-500/20 rounded-2xl p-6 shadow-xl">
+          <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+            <i class="fas fa-search text-green-400"></i> Search & Stalk
+          </h2>
+          <div class="grid md:grid-cols-2 gap-4">
+
+            <div class="api-card bg-[#0a1929]/60 border border-green-500/30 rounded-xl overflow-hidden">
+              <div class="p-4 cursor-pointer" onclick="toggleDetails('githubstalk')">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="px-3 py-1 bg-green-600 text-white rounded-lg font-semibold text-xs">GET</span>
+                    <div>
+                      <div class="text-sm font-semibold text-white">/api/s/githubstalk</div>
+                      <div class="text-xs text-gray-400">GitHub Profile Stalk</div>
+                    </div>
+                  </div>
+                  <div class="flex gap-2">
+                    <button onclick="event.stopPropagation(); copyEndpoint('/api/s/githubstalk?user=')" class="px-2 py-1 bg-gray-700 hover:bg-gray-600 rounded text-xs"><i class="fas fa-copy"></i></button>
+                    <button onclick="event.stopPropagation(); goToEndpoint('/api/s/githubstalk')" class="px-2 py-1 bg-gray-700 hover:bg-gray-600 rounded text-xs"><i class="fas fa-external-link-alt"></i></button>
+                    <i class="fas fa-chevron-down text-gray-400"></i>
+                  </div>
+                </div>
+              </div>
+              <div id="githubstalk-details" class="hidden border-t border-green-500/20 p-4 bg-[#050a14]/50">
+                <input type="text" id="githubstalk-user" placeholder="octocat" class="w-full bg-[#0a1929] border border-green-500/30 rounded-lg px-4 py-2 text-sm text-white mb-3 focus:outline-none focus:border-green-500">
+                <button onclick="testApi('githubstalk')" class="w-full bg-gradient-to-r from-green-600 to-green-700 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:from-green-700 hover:to-green-800">Test API</button>
+                <div id="githubstalk-result" class="mt-3 hidden">
+                  <div class="text-xs text-gray-400 mb-1">Response:</div>
+                  <pre class="bg-[#0a1929] border border-green-500/20 rounded-lg p-3 text-xs overflow-auto max-h-64 text-green-400"></pre>
+                </div>
+              </div>
+            </div>
+
+            <div class="api-card bg-[#0a1929]/60 border border-green-500/30 rounded-xl overflow-hidden">
+              <div class="p-4 cursor-pointer" onclick="toggleDetails('igstalk')">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="px-3 py-1 bg-green-600 text-white rounded-lg font-semibold text-xs">GET</span>
+                    <div>
+                      <div class="text-sm font-semibold text-white">/api/s/igstalk</div>
+                      <div class="text-xs text-gray-400">Instagram Profile Stalk</div>
+                    </div>
+                  </div>
+                  <div class="flex gap-2">
+                    <button onclick="event.stopPropagation(); copyEndpoint('/api/s/igstalk?username=')" class="px-2 py-1 bg-gray-700 hover:bg-gray-600 rounded text-xs"><i class="fas fa-copy"></i></button>
+                    <button onclick="event.stopPropagation(); goToEndpoint('/api/s/igstalk')" class="px-2 py-1 bg-gray-700 hover:bg-gray-600 rounded text-xs"><i class="fas fa-external-link-alt"></i></button>
+                    <i class="fas fa-chevron-down text-gray-400"></i>
+                  </div>
+                </div>
+              </div>
+              <div id="igstalk-details" class="hidden border-t border-green-500/20 p-4 bg-[#050a14]/50">
+                <input type="text" id="igstalk-username" placeholder="username" class="w-full bg-[#0a1929] border border-green-500/30 rounded-lg px-4 py-2 text-sm text-white mb-3 focus:outline-none focus:border-green-500">
+                <button onclick="testApi('igstalk')" class="w-full bg-gradient-to-r from-green-600 to-green-700 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:from-green-700 hover:to-green-800">Test API</button>
+                <div id="igstalk-result" class="mt-3 hidden">
+                  <div class="text-xs text-gray-400 mb-1">Response:</div>
+                  <pre class="bg-[#0a1929] border border-green-500/20 rounded-lg p-3 text-xs overflow-auto max-h-64 text-green-400"></pre>
+                </div>
+              </div>
+            </div>
+
+            <div class="api-card bg-[#0a1929]/60 border border-green-500/30 rounded-xl overflow-hidden">
+              <div class="p-4 cursor-pointer" onclick="toggleDetails('tiktoksearch')">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="px-3 py-1 bg-green-600 text-white rounded-lg font-semibold text-xs">GET</span>
+                    <div>
+                      <div class="text-sm font-semibold text-white">/api/s/tiktoksearch</div>
+                      <div class="text-xs text-gray-400">TikTok Search</div>
+                    </div>
+                  </div>
+                  <div class="flex gap-2">
+                    <button onclick="event.stopPropagation(); copyEndpoint('/api/s/tiktoksearch?query=')" class="px-2 py-1 bg-gray-700 hover:bg-gray-600 rounded text-xs"><i class="fas fa-copy"></i></button>
+                    <button onclick="event.stopPropagation(); goToEndpoint('/api/s/tiktoksearch')" class="px-2 py-1 bg-gray-700 hover:bg-gray-600 rounded text-xs"><i class="fas fa-external-link-alt"></i></button>
+                    <i class="fas fa-chevron-down text-gray-400"></i>
+                  </div>
+                </div>
+              </div>
+              <div id="tiktoksearch-details" class="hidden border-t border-green-500/20 p-4 bg-[#050a14]/50">
+                <input type="text" id="tiktoksearch-query" placeholder="tutorial coding" class="w-full bg-[#0a1929] border border-green-500/30 rounded-lg px-4 py-2 text-sm text-white mb-3 focus:outline-none focus:border-green-500">
+                <button onclick="testApi('tiktoksearch')" class="w-full bg-gradient-to-r from-green-600 to-green-700 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:from-green-700 hover:to-green-800">Test API</button>
+                <div id="tiktoksearch-result" class="mt-3 hidden">
+                  <div class="text-xs text-gray-400 mb-1">Response:</div>
+                  <pre class="bg-[#0a1929] border border-green-500/20 rounded-lg p-3 text-xs overflow-auto max-h-64 text-green-400"></pre>
+                </div>
+              </div>
+            </div>
+
+            <div class="api-card bg-[#0a1929]/60 border border-green-500/30 rounded-xl overflow-hidden">
+              <div class="p-4 cursor-pointer" onclick="toggleDetails('xnxxsearch')">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="px-3 py-1 bg-red-600 text-white rounded-lg font-semibold text-xs">GET</span>
+                    <div>
+                      <div class="text-sm font-semibold text-white">/api/d/xnxxsearch</div>
+                      <div class="text-xs text-gray-400">XNXX Search (18+)</div>
+                    </div>
+                  </div>
+                  <div class="flex gap-2">
+                    <button onclick="event.stopPropagation(); copyEndpoint('/api/d/xnxxsearch?query=')" class="px-2 py-1 bg-gray-700 hover:bg-gray-600 rounded text-xs"><i class="fas fa-copy"></i></button>
+                    <button onclick="event.stopPropagation(); goToEndpoint('/api/d/xnxxsearch')" class="px-2 py-1 bg-gray-700 hover:bg-gray-600 rounded text-xs"><i class="fas fa-external-link-alt"></i></button>
+                    <i class="fas fa-chevron-down text-gray-400"></i>
+                  </div>
+                </div>
+              </div>
+              <div id="xnxxsearch-details" class="hidden border-t border-red-500/20 p-4 bg-[#050a14]/50">
+                <input type="text" id="xnxxsearch-query" placeholder="search query" class="w-full bg-[#0a1929] border border-red-500/30 rounded-lg px-4 py-2 text-sm text-white mb-3 focus:outline-none focus:border-red-500">
+                <button onclick="testApi('xnxxsearch')" class="w-full bg-gradient-to-r from-red-600 to-red-700 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:from-red-700 hover:to-red-800">Test API</button>
+                <div id="xnxxsearch-result" class="mt-3 hidden">
+                  <div class="text-xs text-gray-400 mb-1">Response:</div>
+                  <pre class="bg-[#0a1929] border border-red-500/20 rounded-lg p-3 text-xs overflow-auto max-h-64 text-green-400"></pre>
+                </div>
+              </div>
+            </div>
+
+            <div class="api-card bg-[#0a1929]/60 border border-green-500/30 rounded-xl overflow-hidden">
+              <div class="p-4 cursor-pointer" onclick="toggleDetails('subdomainfinder')">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="px-3 py-1 bg-green-600 text-white rounded-lg font-semibold text-xs">GET</span>
+                    <div>
+                      <div class="text-sm font-semibold text-white">/api/s/subdomainfinder</div>
+                      <div class="text-xs text-gray-400">Subdomain Finder</div>
+                    </div>
+                  </div>
+                  <div class="flex gap-2">
+                    <button onclick="event.stopPropagation(); copyEndpoint('/api/s/subdomainfinder?domain=')" class="px-2 py-1 bg-gray-700 hover:bg-gray-600 rounded text-xs"><i class="fas fa-copy"></i></button>
+                    <button onclick="event.stopPropagation(); goToEndpoint('/api/s/subdomainfinder')" class="px-2 py-1 bg-gray-700 hover:bg-gray-600 rounded text-xs"><i class="fas fa-external-link-alt"></i></button>
+                    <i class="fas fa-chevron-down text-gray-400"></i>
+                  </div>
+                </div>
+              </div>
+              <div id="subdomainfinder-details" class="hidden border-t border-green-500/20 p-4 bg-[#050a14]/50">
+                <input type="text" id="subdomainfinder-domain" placeholder="example.com" class="w-full bg-[#0a1929] border border-green-500/30 rounded-lg px-4 py-2 text-sm text-white mb-3 focus:outline-none focus:border-green-500">
+                <button onclick="testApi('subdomainfinder')" class="w-full bg-gradient-to-r from-green-600 to-green-700 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:from-green-700 hover:to-green-800">Test API</button>
+                <div id="subdomainfinder-result" class="mt-3 hidden">
+                  <div class="text-xs text-gray-400 mb-1">Response:</div>
+                  <pre class="bg-[#0a1929] border border-green-500/20 rounded-lg p-3 text-xs overflow-auto max-h-64 text-green-400"></pre>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <section id="features-section">
+        <div class="bg-gradient-to-br from-[#0f1724] to-[#1a2332] border border-purple-500/20 rounded-2xl p-6 shadow-xl">
+          <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+            <i class="fas fa-palette text-purple-400"></i> Features
+          </h2>
+          <div class="grid md:grid-cols-2 gap-4">
+
+            <div class="api-card bg-[#0a1929]/60 border border-purple-500/30 rounded-xl overflow-hidden">
+              <div class="p-4 cursor-pointer" onclick="toggleDetails('brat')">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="px-3 py-1 bg-purple-600 text-white rounded-lg font-semibold text-xs">GET</span>
+                    <div>
+                      <div class="text-sm font-semibold text-white">/api/f/brat</div>
+                      <div class="text-xs text-gray-400">Brat Style Generator</div>
+                    </div>
+                  </div>
+                  <div class="flex gap-2">
+                    <button onclick="event.stopPropagation(); copyEndpoint('/api/f/brat?text=')" class="px-2 py-1 bg-gray-700 hover:bg-gray-600 rounded text-xs"><i class="fas fa-copy"></i></button>
+                    <button onclick="event.stopPropagation(); goToEndpoint('/api/f/brat')" class="px-2 py-1 bg-gray-700 hover:bg-gray-600 rounded text-xs"><i class="fas fa-external-link-alt"></i></button>
+                    <i class="fas fa-chevron-down text-gray-400"></i>
+                  </div>
+                </div>
+              </div>
+              <div id="brat-details" class="hidden border-t border-purple-500/20 p-4 bg-[#050a14]/50">
+                <input type="text" id="brat-text" placeholder="your text here" class="w-full bg-[#0a1929] border border-purple-500/30 rounded-lg px-4 py-2 text-sm text-white mb-3 focus:outline-none focus:border-purple-500">
+                <button onclick="testApi('brat')" class="w-full bg-gradient-to-r from-purple-600 to-purple-700 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:from-purple-700 hover:to-purple-800">Test API</button>
+                <div id="brat-result" class="mt-3 hidden">
+                  <div class="text-xs text-gray-400 mb-1">Response:</div>
+                  <div class="bg-[#0a1929] border border-purple-500/20 rounded-lg p-3 overflow-auto max-h-64"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="api-card bg-[#0a1929]/60 border border-purple-500/30 rounded-xl overflow-hidden">
+              <div class="p-4 cursor-pointer" onclick="toggleDetails('ssip')">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="px-3 py-1 bg-purple-600 text-white rounded-lg font-semibold text-xs">GET</span>
+                    <div>
+                      <div class="text-sm font-semibold text-white">/api/f/ssip</div>
+                      <div class="text-xs text-gray-400">iPhone Screenshot Generator</div>
+                    </div>
+                  </div>
+                  <div class="flex gap-2">
+                    <button onclick="event.stopPropagation(); copyEndpoint('/api/f/ssip?text=&batre=100&time=&signal=4&emoji=apple&carrier=')" class="px-2 py-1 bg-gray-700 hover:bg-gray-600 rounded text-xs"><i class="fas fa-copy"></i></button>
+                    <button onclick="event.stopPropagation(); goToEndpoint('/api/f/ssip')" class="px-2 py-1 bg-gray-700 hover:bg-gray-600 rounded text-xs"><i class="fas fa-external-link-alt"></i></button>
+                    <i class="fas fa-chevron-down text-gray-400"></i>
+                  </div>
+                </div>
+              </div>
+              <div id="ssip-details" class="hidden border-t border-purple-500/20 p-4 bg-[#050a14]/50">
+                <input type="text" id="ssip-text" placeholder="Message text" class="w-full bg-[#0a1929] border border-purple-500/30 rounded-lg px-4 py-2 text-sm text-white mb-2 focus:outline-none focus:border-purple-500">
+                <div class="grid grid-cols-2 gap-2 mb-3">
+                  <input type="text" id="ssip-batre" placeholder="Battery: 100" class="bg-[#0a1929] border border-purple-500/30 rounded-lg px-4 py-2 text-sm text-white focus:outline-none focus:border-purple-500">
+                  <input type="text" id="ssip-time" placeholder="Time: 10:30" class="bg-[#0a1929] border border-purple-500/30 rounded-lg px-4 py-2 text-sm text-white focus:outline-none focus:border-purple-500">
+                  <input type="text" id="ssip-signal" placeholder="Signal: 4" class="bg-[#0a1929] border border-purple-500/30 rounded-lg px-4 py-2 text-sm text-white focus:outline-none focus:border-purple-500">
+                  <input type="text" id="ssip-emoji" placeholder="Emoji: apple" class="bg-[#0a1929] border border-purple-500/30 rounded-lg px-4 py-2 text-sm text-white focus:outline-none focus:border-purple-500">
+                  <input type="text" id="ssip-carrier" placeholder="Carrier" class="bg-[#0a1929] border border-purple-500/30 rounded-lg px-4 py-2 text-sm text-white focus:outline-none focus:border-purple-500 col-span-2">
+                </div>
+                <button onclick="testApi('ssip')" class="w-full bg-gradient-to-r from-purple-600 to-purple-700 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:from-purple-700 hover:to-purple-800">Test API</button>
+                <div id="ssip-result" class="mt-3 hidden">
+                  <div class="text-xs text-gray-400 mb-1">Response:</div>
+                  <div class="bg-[#0a1929] border border-purple-500/20 rounded-lg p-3 overflow-auto max-h-64"></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <section id="utils-section">
+        <div class="bg-gradient-to-br from-[#0f1724] to-[#1a2332] border border-yellow-500/20 rounded-2xl p-6 shadow-xl">
+          <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+            <i class="fas fa-cog text-yellow-400"></i> Utilities
+          </h2>
+          <div class="grid md:grid-cols-2 gap-4">
+
+            <div class="api-card bg-[#0a1929]/60 border border-yellow-500/30 rounded-xl overflow-hidden">
+              <div class="p-4 cursor-pointer" onclick="toggleDetails('hello')">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="px-3 py-1 bg-yellow-600 text-white rounded-lg font-semibold text-xs">GET</span>
+                    <div>
+                      <div class="text-sm font-semibold text-white">/api/hello</div>
+                      <div class="text-xs text-gray-400">Basic Test Endpoint</div>
+                    </div>
+                  </div>
+                  <div class="flex gap-2">
+                    <button onclick="event.stopPropagation(); copyEndpoint('/api/hello')" class="px-2 py-1 bg-gray-700 hover:bg-gray-600 rounded text-xs"><i class="fas fa-copy"></i></button>
+                    <button onclick="event.stopPropagation(); goToEndpoint('/api/hello')" class="px-2 py-1 bg-gray-700 hover:bg-gray-600 rounded text-xs"><i class="fas fa-external-link-alt"></i></button>
+                    <i class="fas fa-chevron-down text-gray-400"></i>
+                  </div>
+                </div>
+              </div>
+              <div id="hello-details" class="hidden border-t border-yellow-500/20 p-4 bg-[#050a14]/50">
+                <button onclick="testApi('hello')" class="w-full bg-gradient-to-r from-yellow-600 to-yellow-700 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:from-yellow-700 hover:to-yellow-800">Test API</button>
+                <div id="hello-result" class="mt-3 hidden">
+                  <div class="text-xs text-gray-400 mb-1">Response:</div>
+                  <pre class="bg-[#0a1929] border border-yellow-500/20 rounded-lg p-3 text-xs overflow-auto max-h-64 text-green-400"></pre>
+                </div>
+              </div>
+            </div>
+
+            <div class="api-card bg-[#0a1929]/60 border border-yellow-500/30 rounded-xl overflow-hidden">
+              <div class="p-4 cursor-pointer" onclick="toggleDetails('quotes')">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="px-3 py-1 bg-yellow-600 text-white rounded-lg font-semibold text-xs">GET</span>
+                    <div>
+                      <div class="text-sm font-semibold text-white">/api/quotes</div>
+                      <div class="text-xs text-gray-400">Random Quotes</div>
+                    </div>
+                  </div>
+                  <div class="flex gap-2">
+                    <button onclick="event.stopPropagation(); copyEndpoint('/api/quotes')" class="px-2 py-1 bg-gray-700 hover:bg-gray-600 rounded text-xs"><i class="fas fa-copy"></i></button>
+                    <button onclick="event.stopPropagation(); goToEndpoint('/api/quotes')" class="px-2 py-1 bg-gray-700 hover:bg-gray-600 rounded text-xs"><i class="fas fa-external-link-alt"></i></button>
+                    <i class="fas fa-chevron-down text-gray-400"></i>
+                  </div>
+                </div>
+              </div>
+              <div id="quotes-details" class="hidden border-t border-yellow-500/20 p-4 bg-[#050a14]/50">
+                <button onclick="testApi('quotes')" class="w-full bg-gradient-to-r from-yellow-600 to-yellow-700 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:from-yellow-700 hover:to-yellow-800">Test API</button>
+                <div id="quotes-result" class="mt-3 hidden">
+                  <div class="text-xs text-gray-400 mb-1">Response:</div>
+                  <pre class="bg-[#0a1929] border border-yellow-500/20 rounded-lg p-3 text-xs overflow-auto max-h-64 text-green-400"></pre>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <footer class="mt-12 text-center text-gray-500 text-sm pb-4">
+      <p>Made with <i class="fas fa-heart text-red-500"></i> by <span class="text-purple-400 font-semibold">IkyyOfficial</span></p>
+    </footer>
+  </div>
+
+  <nav class="mobile-nav bg-gradient-to-t from-[#0a1929] to-[#0f1724] border-t border-blue-500/30 backdrop-blur-lg">
+    <div class="grid grid-cols-4 gap-1 p-2">
+      <button onclick="scrollToSection('downloader-section')" class="flex flex-col items-center gap-1 py-3 px-2 rounded-lg hover:bg-blue-500/20 transition">
+        <i class="fas fa-download text-xl text-blue-400"></i>
+        <span class="text-xs text-gray-400">Downloader</span>
+      </button>
+      <button onclick="scrollToSection('search-section')" class="flex flex-col items-center gap-1 py-3 px-2 rounded-lg hover:bg-green-500/20 transition">
+        <i class="fas fa-search text-xl text-green-400"></i>
+        <span class="text-xs text-gray-400">Search</span>
+      </button>
+      <button onclick="scrollToSection('features-section')" class="flex flex-col items-center gap-1 py-3 px-2 rounded-lg hover:bg-purple-500/20 transition">
+        <i class="fas fa-palette text-xl text-purple-400"></i>
+        <span class="text-xs text-gray-400">Features</span>
+      </button>
+      <button onclick="scrollToSection('utils-section')" class="flex flex-col items-center gap-1 py-3 px-2 rounded-lg hover:bg-yellow-500/20 transition">
+        <i class="fas fa-cog text-xl text-yellow-400"></i>
+        <span class="text-xs text-gray-400">Utils</span>
+      </button>
+    </div>
+  </nav>
+
+  <script>
+    function toggleDetails(id) {
+      const details = document.getElementById(id + '-details');
+      details.classList.toggle('hidden');
+    }
+
+    function copyEndpoint(endpoint) {
+      const fullUrl = window.location.origin + endpoint;
+      navigator.clipboard.writeText(fullUrl).then(() => {
+        alert('Endpoint copied: ' + fullUrl);
+      });
+    }
+
+    function goToEndpoint(endpoint) {
+      window.open(window.location.origin + endpoint, '_blank');
+    }
+
+    function scrollToSection(sectionId) {
+      document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    async function testApi(apiName) {
+      const resultDiv = document.getElementById(apiName + '-result');
+      const resultContent = resultDiv.querySelector('pre') || resultDiv.querySelector('div');
+      let url = '';
+      
+      switch(apiName) {
+        case 'tiktok':
+          const tiktokUrl = document.getElementById('tiktok-url').value;
+          if (!tiktokUrl) { alert('Masukkan URL TikTok!'); return; }
+          url = `/api/d/tiktok?url=${encodeURIComponent(tiktokUrl)}`;
+          break;
+        case 'instagram':
+          const igUrl = document.getElementById('instagram-url').value;
+          if (!igUrl) { alert('Masukkan URL Instagram!'); return; }
+          url = `/api/d/instagram?url=${encodeURIComponent(igUrl)}`;
+          break;
+        case 'xnxxdl':
+          const xnxxUrl = document.getElementById('xnxxdl-url').value;
+          if (!xnxxUrl) { alert('Masukkan URL XNXX!'); return; }
+          url = `/api/d/xnxxdl?url=${encodeURIComponent(xnxxUrl)}`;
+          break;
+        case 'githubstalk':
+          const ghUser = document.getElementById('githubstalk-user').value;
+          if (!ghUser) { alert('Masukkan username GitHub!'); return; }
+          url = `/api/s/githubstalk?user=${encodeURIComponent(ghUser)}`;
+          break;
+        case 'igstalk':
+          const igUsername = document.getElementById('igstalk-username').value;
+          if (!igUsername) { alert('Masukkan username Instagram!'); return; }
+          url = `/api/s/igstalk?username=${encodeURIComponent(igUsername)}`;
+          break;
+        case 'tiktoksearch':
+          const ttQuery = document.getElementById('tiktoksearch-query').value;
+          if (!ttQuery) { alert('Masukkan query pencarian!'); return; }
+          url = `/api/s/tiktoksearch?query=${encodeURIComponent(ttQuery)}`;
+          break;
+        case 'xnxxsearch':
+          const xnxxQuery = document.getElementById('xnxxsearch-query').value;
+          if (!xnxxQuery) { alert('Masukkan query pencarian!'); return; }
+          url = `/api/d/xnxxsearch?query=${encodeURIComponent(xnxxQuery)}`;
+          break;
+        case 'subdomainfinder':
+          const domain = document.getElementById('subdomainfinder-domain').value;
+          if (!domain) { alert('Masukkan domain!'); return; }
+          url = `/api/s/subdomainfinder?domain=${encodeURIComponent(domain)}`;
+          break;
+        case 'brat':
+          const bratText = document.getElementById('brat-text').value;
+          if (!bratText) { alert('Masukkan text!'); return; }
+          url = `/api/f/brat?text=${encodeURIComponent(bratText)}`;
+          break;
+        case 'ssip':
+          const ssipText = document.getElementById('ssip-text').value;
+          const batre = document.getElementById('ssip-batre').value || '100';
+          const time = document.getElementById('ssip-time').value;
+          const signal = document.getElementById('ssip-signal').value || '4';
+          const emoji = document.getElementById('ssip-emoji').value || 'apple';
+          const carrier = document.getElementById('ssip-carrier').value;
+          if (!ssipText) { alert('Masukkan text!'); return; }
+          url = `/api/f/ssip?text=${encodeURIComponent(ssipText)}&batre=${batre}&time=${time}&signal=${signal}&emoji=${emoji}&carrier=${carrier}`;
+          break;
+        case 'hello':
+          url = '/api/hello';
+          break;
+        case 'quotes':
+          url = '/api/quotes';
+          break;
+        default:
+          alert('API tidak dikenal!');
+          return;
+      }
+      
+      resultContent.textContent = 'Loading...';
+      resultDiv.classList.remove('hidden');
+      
+      try {
+        const response = await fetch(url);
+        
+        if (apiName === 'brat' || apiName === 'ssip') {
+          const blob = await response.blob();
+          const imgUrl = URL.createObjectURL(blob);
+          resultContent.innerHTML = `<img src="${imgUrl}" class="max-w-full rounded-lg" alt="Generated Image">`;
+        } else {
+          const data = await response.json();
+          resultContent.textContent = JSON.stringify(data, null, 2);
+        }
+      } catch (error) {
+        resultContent.textContent = 'Error: ' + error.message;
+      }
+    }
+  </script>
+</body>
+</html>
